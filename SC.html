@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Strength Checker</title>
+  <style>
+    /* Basic styling for the page */
+    body { font-family: Arial, sans-serif; margin: 50px; }
+    .strength { font-weight: bold; }
+    .weak { color: red; }
+    .medium { color: orange; }
+    .strong { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Password Strength Checker</h1>
+  <input type="password" id="password" placeholder="Enter your password" oninput="checkStrength()">
+  <p class="strength" id="strength">Strength: </p>
+
+  <script>
+    function checkStrength() {
+      var strength = document.getElementById('strength');
+      var password = document.getElementById('password').value;
+      var regexWeak = /[a-z]/;
+      var regexMedium = /\d+/;
+      var regexStrong = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+      
+      if(password.length < 6) {
+        strength.innerHTML = 'Strength: Weak';
+        strength.className = 'strength weak';
+      } else if(regexWeak.test(password) && regexMedium.test(password) && regexStrong.test(password)) {
+        strength.innerHTML = 'Strength: Strong';
+        strength.className = 'strength strong';
+      } else {
+        strength.innerHTML = 'Strength: Medium';
+        strength.className = 'strength medium';
+      }
+    }
+  </script>
+</body>
+</html>
